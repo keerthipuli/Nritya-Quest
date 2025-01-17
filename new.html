@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+        }
+        .state-info {
+            display: flex;
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            align-items: center;
+        }
+        .state-info img {
+        width: 50%; 
+        height: 50%; 
+        border-radius: 10px;
+        object-fit: cover; 
+       }
+        .description {
+            flex: 1;
+            text-align: justify;
+            font-size: 30px;
+        }
+        .description p {
+            margin: 0; /* Remove default margin for paragraphs */
+            line-height: 1.5; /* Set line-height for better readability */
+        }
+    </style>
+</head>
+<body>
+    <div class="state-info">
+        <img src="" alt="State Photo" id="state-photo">
+        <div class="description" id="state-description">
+        <p id="state-description"></p>
+    </div>
+    </div>
+
+    <script>
+        // Function to extract parameters from URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Get the photo URL and description from the URL parameters
+        const photoUrl = getParameterByName('photo');
+        const description = getParameterByName('description');
+
+        // Display the photo and description
+        const statePhoto = document.getElementById("state-photo");
+        const stateDescription = document.getElementById("state-description");
+
+        statePhoto.src = photoUrl;
+        stateDescription.textContent = description;
+    </script>
+</body>
+</html>
